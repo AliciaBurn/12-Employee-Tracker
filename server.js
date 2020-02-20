@@ -18,8 +18,8 @@ inquirer.prompt([
                 value: "viewEmployeeByDepartment"
             },
             {
-                name: "View all employees by Manager",
-                value: "viewEmployeesByManager"
+                name: "View all employees by Role",
+                value: "viewEmployeesByRole"
             },
             {
                 name: "Add employee",
@@ -34,10 +34,6 @@ inquirer.prompt([
                 value: "updateEmployeesRole"
             },
             {
-                name: "Update Employee manager",
-                value: "updateEmployeeManager"
-            },
-            {
                 name: "View all roles",
                 value: "viewAllRoles"
             },
@@ -46,21 +42,21 @@ inquirer.prompt([
                 value: "addRole"
             },
             {
-                name: "remove role",
+                name: "Remove role",
                 value: "removeRole"
             },
-            // {
-            //     name: "View all departments",
-            //     value: "viewAllDepartments"
-            // },
-            // {
-            //     name: "Add department",
-            //     value: "addDepartment"
-            // },
-            // {
-            //     name: "Remove department",
-            //     value: "removeDepartment"
-            // },
+            {
+                name: "View all departments",
+                value: "viewAllDepartments"
+            },
+            {
+                name: "Add Department",
+                value: "addDepartment"
+            },
+            {
+                name: "Remove department",
+                value: "removeDepartment"
+            },
             {
                 name: "Quit",
                 value: "quit"
@@ -75,11 +71,8 @@ inquirer.prompt([
      case "viewEmployeeByDepartment":
      return allEmployeesByDepartment();
 
-    case "viewEmployeesByManager":
-    return viewEmployeesByManager();
-
-    case "viewEmployeesByManager":
-    return viewEmployeesByManager();
+    case "viewEmployeesByRole":
+    return viewEmployeesByRole();
 
     case "addEmployee":
     return addEmployee();
@@ -90,9 +83,6 @@ inquirer.prompt([
     case "updateEmployeesRole":
     return updateEmployeeRole();
 
-    case "updateEmployeeManager":
-    return updateEmployeeManager();
-
     case "viewAllRoles":
     return viewAllRoles();
 
@@ -102,14 +92,14 @@ inquirer.prompt([
     case "removeRole":
     return removeRole();
 
-    // case "viewAllDepartments"
+    case "viewAllDepartments":
+    return viewAllDepartments();
 
-
-    // case "addDepartment"
-
-
-    // case "removeDepartment"
-
+    case "addDepartment":
+    return addDepartment();
+    
+    case "removeDepartment":
+    return removeDepartment();
 
     case "quit":
     return connection.end();
