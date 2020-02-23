@@ -42,3 +42,27 @@ VALUES ("Tre", "Fountain", 4, NULL);
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES ("Nye", "Grinnage", 2, NULL);
+
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("Rainbow", "Giaquinto", 2);
+
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("Tara", "Shaw", 4);
+
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("Kelly", "Braun", 6);
+
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("Patrick", "Carlton", 8);
+
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("Arthur", "Burn", 5);
+
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("Eric", "Price", 3);
+
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("Erika", "Brunson", 6);
+
+INSERT INTO employee (first_name, last_name, role_id)
+VALUES ("Cody", "Simmering", 7);

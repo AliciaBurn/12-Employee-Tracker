@@ -1,71 +1,83 @@
 const mysql = require('mysql');
 const inquirer = require('inquirer');
-require('console.table');
-const db = require('./db');
-var questions =  [
-    {
-        name: "View all employees",
-        value: "viewEmployees"
-    },
-    {
-        name: "Add employee",
-        value: "addEmployee"
-    },
-    {
-        name: "Update Employees role",
-        value: "updateEmployeesRole"
-    },
-    {
-        name: "View all roles",
-        value: "viewAllRoles"
-    },
-    {
-        name: "Add role",
-        value: "addRole"
-    },
-    {
-        name: "View all departments",
-        value: "viewAllDepartments"
-    },
-    {
-        name: "Add Department",
-        value: "addDepartment"
-    },
-    {
-        name: "Quit",
-        value: "quit"
-    }
-];
+const consoleTable = require('console.table');
+// const db = require('./db/connection');
+
+var connection = mysql.createConnection({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    password: "yourRootPassword",
+    database: "employeeTracker_DB"
+  });
+
+
+function updateServer() {
+    connection.query("SELECT * from role", function(error, res) {
+      allroles = res.map(role => ({ name: role.title, value: role.id }));
+    });
+  
+    connection.query("SELECT * from department", function(error, res) {
+      alldepartments = res.map(dept => ({ name: dept.name, value: dept.id }));
+    });
+  
+    connection.query("SELECT * from employee", function(error, res) {
+      allemployees = res.map(employee => ({
+        name: `${employee.first_name} ${employee.last_name}`,
+        value: employee.id
+      }));
+    });
+  }
+  
+  connection.connect(function(err) {
+    if (err) throw err;
+    console.log("\nWelcome to the Employee Management System!\n");
+    init();
+    updateServer();
+  });
+
+
 function init() {
     inquirer.prompt([
         {
             type: "list",
-            name: "choice",
+            name: "selector",
             message: "What would like to do?",
-            choices: questions
-        }
-    ]).then(choices => {
-        // console.log("in .then, choices=", choices)
-        switch (choices) {
-            case "viewEmployees":
-                return viewEmployees();
+            choices: [
+                "View All Employees",
+                "View All Departments",
+                "View All Roles",
+                "Add Employee",
+                "Add Department",
+                "Add Role",
+                "Update Employee Role",
+                "Quit"
+            ]
 
-            case "addEmployee":
+
+        }
+    ]).then(answer => {
+        // console.log("in .then, choices=", choices)
+        switch (answer.selector) {
+            case "View All Employees":
+                return viewAllEmployees();
+
+            case "Add Employee":
                 return addEmployee();
 
-            case "updateEmployeesRole":
+            case "Update Employee Role":
                 return updateEmployeeRole();
 
-            case "viewAllRoles":
+            case "View All Roles":
                 return viewAllRoles();
 
-            case "addRole":
+            case "Add Role":
                 return addRole();
 
-            case "viewAllDepartments":
+            case "View All Departments":
                 return viewAllDepartments();
 
-            case "addDepartment":
+            case "Add Department":
                 return addDepartment();
 
             case "quit":
@@ -74,7 +86,7 @@ function init() {
 });
 }
 
-function viewEmployees() {
+function viewAllEmployees() {
     console.log("\nViewing all employees...\n");
     connection.query(
         "SELECT employee.id, first_name AS firstname, last_name AS lastname, title AS role, name AS department, salary as salary FROM employee INNER JOIN role ON employee.role_id = role.id INNER JOIN department ON role.department_id = department.id;", function (err, res) {
@@ -119,8 +131,8 @@ function addEmployee() {
                 message: "What is their last name?"
             },
             {
-                name: "role",
                 type: "list",
+                name: "role",
                 message: "What is their role?",
                 choices: allroles
             }

@@ -2,7 +2,7 @@
   "name": "12-employee-tracker",
   "version": "1.0.0",
   "description": "Unit 12 MySQL Homework: Employee Tracker",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodes server.js"
