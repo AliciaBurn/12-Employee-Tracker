@@ -146,6 +146,7 @@ function addEmployee() {
                 function (err, res) {
                     if (err) throw err;
                     console.table("\nnew employee added.\n");
+                    updateServer();
                     startManager();
                 }
             );
